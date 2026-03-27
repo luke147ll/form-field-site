@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Interactive Dashboard Guide — Form and Field</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-serif;line-height:1.7}
+/* Tooltip system */
+[data-tip]{position:relative;cursor:help}
+[data-tip]:hover::after{
+  content:attr(data-tip);
+  position:absolute;
+  left:50%;transform:translateX(-50%);
+  bottom:calc(100% + 10px);
+  background:#11111b;color:#cdd6f4;
+  border:1px solid #cba6f7;
+  border-radius:8px;padding:10px 14px;
+  font-size:13px;font-weight:400;font-family:"Segoe UI",system-ui,sans-serif;
+  line-height:1.5;white-space:normal;width:260px;
+  z-index:9999;pointer-events:none;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+}
+[data-tip]:hover::before{
+  content:'';position:absolute;
+  left:50%;transform:translateX(-50%);
+  bottom:calc(100% + 4px);
+  border:6px solid transparent;border-top-color:#cba6f7;
+  z-index:9999;pointer-events:none;
+}
+/* Right-aligned tooltips */
+[data-tip-right]:hover::after{left:auto;right:0;transform:none}
+[data-tip-right]:hover::before{left:auto;right:12px;transform:none}
+/* Bottom tooltips for header items */
+.tip-bottom[data-tip]:hover::after{
+  bottom:auto;top:calc(100% + 10px);
+}
+.tip-bottom[data-tip]:hover::before{
+  bottom:auto;top:calc(100% + 4px);
+  border:6px solid transparent;border-bottom-color:#cba6f7;
+}
+/* Marker dot */
+.marker{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:18px;height:18px;border-radius:50%;
+  background:#cba6f7;color:#11111b;
+  font-size:9px;font-weight:700;font-family:monospace;
+  position:absolute;top:-6px;right:-6px;z-index:10;
+  pointer-events:none;
+}
+/* Glow on hover */
+[data-tip]:hover{outline:1.5px solid rgba(203,166,247,0.5);outline-offset:2px;border-radius:4px}
+/* Section label */
+.section-label{
+  display:inline-block;font-size:11px;text-transform:uppercase;
+  letter-spacing:1px;color:#cba6f7;font-weight:600;
+  background:rgba(203,166,247,0.1);padding:3px 12px;border-radius:4px;
+  margin:20px 0 10px;font-family:monospace;
+}
+</style>
+</head>
+<body>
+<div style="max-width:800px;margin:0 auto;padding:32px 16px 64px;">
+
+<!-- Header -->
+<div style="display:flex;align-items:center;justify-content:space-between;padding:0 0 24px;margin-bottom:8px;">
+  <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+    <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,rgba(203,166,247,0.2),rgba(137,180,250,0.2));border:1.5px solid rgba(203,166,247,0.35);display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:14px;color:#cba6f7;">FF</div>
+    <span style="font-family:monospace;font-weight:600;font-size:15px;color:#cdd6f4;">Form and Field</span>
+  </a>
+  <a href="/" style="font-size:13px;color:#a6adc8;text-decoration:none;font-family:monospace;">← Home</a>
+</div>
+
+<!-- Page Index -->
+<div style="background:#181825;border:1px solid #313244;border-radius:12px;padding:16px 20px;margin-bottom:32px;">
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#7f849c;font-weight:600;margin-bottom:12px;">Documentation</div>
+  <div style="display:flex;flex-direction:column;gap:4px;">
+    <a href="/quick-start-guide/" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(203,166,247,0.12);color:#cba6f7;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:11px;flex-shrink:0;">QS</div>
+      <span style="font-size:13px;font-weight:500;color:#a6adc8;">Quick Start Guide</span>
+    </a>
+    <a href="/colors-and-elevation-tags/" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(137,180,250,0.12);color:#89b4fa;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:11px;flex-shrink:0;">CL</div>
+      <span style="font-size:13px;font-weight:500;color:#a6adc8;">Colors &amp; Elevation Tags</span>
+    </a>
+    <a href="/dashboard-guide/" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;background:rgba(203,166,247,0.1);border:1px solid rgba(203,166,247,0.25);">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(203,166,247,0.12);color:#cba6f7;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:11px;flex-shrink:0;">DB</div>
+      <span style="font-size:13px;font-weight:600;color:#cba6f7;">Dashboard Guide</span>
+    </a>
+    <a href="/measurements-and-reports/" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(166,227,161,0.12);color:#a6e3a1;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:11px;flex-shrink:0;">MS</div>
+      <span style="font-size:13px;font-weight:500;color:#a6adc8;">Measurements &amp; Reports</span>
+    </a>
+    <a href="/hyper-parser/" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(180,190,254,0.12);color:#b4befe;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:11px;flex-shrink:0;">HP</div>
+      <span style="font-size:13px;font-weight:500;color:#a6adc8;">Hyper Parser</span>
+    </a>
+    <a href="/assemblies/" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(243,139,168,0.12);color:#f38ba8;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:11px;flex-shrink:0;">AB</div>
+      <span style="font-size:13px;font-weight:500;color:#a6adc8;">Assemblies</span>
+    </a>
+    <a href="/multiverse/" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(250,179,135,0.12);color:#fab387;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:11px;flex-shrink:0;">MV</div>
+      <span style="font-size:13px;font-weight:500;color:#a6adc8;">Multiverse</span>
+    </a>
+    <a href="/notes/" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(148,226,213,0.12);color:#94e2d5;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:11px;flex-shrink:0;">NT</div>
+      <span style="font-size:13px;font-weight:500;color:#a6adc8;">Notes</span>
+    </a>
+    <a href="/cad-overlays-and-gridlines/" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;">
+      <div style="width:28px;height:28px;border-radius:6px;background:rgba(249,226,175,0.12);color:#f9e2af;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:11px;flex-shrink:0;">CD</div>
+      <span style="font-size:13px;font-weight:500;color:#a6adc8;">CAD Overlays &amp; Gridlines</span>
+    </a>
+  </div>
+</div>
+
+<!-- Title -->
+<div style="text-align:center;padding:40px 0 32px;border-bottom:2px solid #313244;margin-bottom:40px">
+  <div style="display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#cba6f7;background:rgba(203,166,247,0.1);padding:4px 16px;border-radius:20px;margin-bottom:14px;font-weight:600">Interactive Guide</div>
+  <h1 style="font-size:36px;font-weight:700;letter-spacing:-1px;margin:0 0 10px;color:#cdd6f4">Dashboard <span style="color:#cba6f7">Reference</span></h1>
+  <p style="font-size:16px;color:#a6adc8;max-width:520px;margin:0 auto">Hover over any element to see what it does. This is a visual map of the Takeoff Report dashboard.</p>
+</div>
+
+<!-- INFO CALLOUT -->
+<div style="background:rgba(137,180,250,0.08);border-left:3px solid #89b4fa;border-radius:0 6px 6px 0;padding:14px 18px;margin-bottom:40px;font-size:14px;color:#a6adc8">
+  <strong style="color:#cdd6f4">How to use this page:</strong> Hover over any button, badge, or element in the dashboard mock-up below. A tooltip will appear explaining what that element does. Elements with a <span style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:#cba6f7;color:#11111b;font-size:8px;font-weight:700;font-family:monospace;vertical-align:middle;">?</span> purple glow on hover are interactive.
+</div>
+
+<!-- ============================================================ -->
+<!-- DASHBOARD MOCK-UP -->
+<!-- ============================================================ -->
+<div style="border:1px solid #45475a;border-radius:12px;overflow:hidden;background:#1e1e2e;box-shadow:0 16px 60px rgba(0,0,0,0.4);">
+
+<!-- ==================== HEADER BAR ==================== -->
+<div class="section-label" style="margin:12px 12px 0">Header Toolbar</div>
+<div style="display:flex;align-items:center;gap:6px;padding:8px 12px;background:#181825;border-bottom:1px solid #313244;flex-wrap:wrap;">
+
+  <!-- Title -->
+  <span data-tip="The dashboard title and version number. This is the main Takeoff Report window that opens after scanning a model." class="tip-bottom" style="font-family:monospace;font-weight:700;font-size:14px;color:#cba6f7;margin-right:4px;">TAKEOFF v6</span>
+
+  <!-- EKG badge -->
+  <span data-tip="Activity heartbeat indicator. Pulses when the dashboard is communicating with SketchUp. Confirms the extension is connected and responsive." class="tip-bottom" style="font-family:monospace;font-size:10px;color:#a6e3a1;border:1px solid rgba(166,227,161,0.3);border-radius:4px;padding:1px 6px;">~</span>
+
+  <div style="width:1px;height:20px;background:#313244;margin:0 4px;"></div>
+
+  <!-- Show All -->
+  <span data-tip="SHOW ALL — Unhides every entity in the SketchUp model. Use this to reset visibility after isolating or hiding categories. Also resets the eye toggles in the dashboard." class="tip-bottom" style="padding:4px 10px;border-radius:6px;background:#313244;color:#cdd6f4;font-size:11px;font-family:monospace;cursor:pointer;">Show All</span>
+
+  <!-- Highlight All -->
+  <span data-tip="HIGHLIGHT ALL — Applies a colored highlight overlay to every scanned entity in the model. Useful for seeing which parts of your model FF has recognized and categorized." class="tip-bottom" style="padding:4px 10px;border-radius:6px;background:#cba6f7;color:#11111b;font-size:11px;font-family:monospace;font-weight:600;cursor:pointer;">Highlight All</span>
+
+  <!-- Clear -->
+  <span data-tip="CLEAR HIGHLIGHTS — Removes all colored highlight overlays from the model. Entities return to their normal material appearance." class="tip-bottom" style="padding:4px 10px;border-radius:6px;background:#313244;color:#cdd6f4;font-size:11px;font-family:monospace;cursor:pointer;">Clear</span>
+
+  <!-- Undo -->
+  <span data-tip="UNDO — Reverts the last category assignment, cost code change, or bulk edit action. Supports up to 50 undo steps. Only applies to dashboard edits, not SketchUp model changes." class="tip-bottom" style="padding:4px 10px;border-radius:6px;background:#313244;color:#cdd6f4;font-size:11px;font-family:monospace;cursor:pointer;">Undo</span>
+
+  <div style="width:1px;height:20px;background:#313244;margin:0 4px;"></div>
+
+  <!-- Export -->
+  <span data-tip="EXPORT — Opens the export menu. Choose CSV for spreadsheet-ready data or HTML Report for a formatted, printable takeoff report with quantities, cost codes, and category breakdowns." class="tip-bottom" style="padding:4px 10px;border-radius:6px;background:#cba6f7;color:#11111b;font-size:11px;font-family:monospace;font-weight:600;cursor:pointer;">Export</span>
+
+  <div style="width:1px;height:20px;background:#313244;margin:0 4px;"></div>
+
+  <!-- LF Tool -->
+  <span data-tip="LINEAR FEET TOOL — Activates a SketchUp measurement tool that lets you draw a path along edges. The measured length is saved as a manual LF measurement for the selected category." class="tip-bottom" style="padding:4px 10px;border-radius:6px;background:#f9e2af;color:#11111b;font-size:11px;font-family:monospace;font-weight:600;cursor:pointer;">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="vertical-align:middle;"><line x1="2" y1="8" x2="14" y2="8"/><line x1="2" y1="5" x2="2" y2="11"/><line x1="14" y1="5" x2="14" y2="11"/><line x1="5" y1="7" x2="5" y2="9"/><line x1="8" y1="6" x2="8" y2="10"/><line x1="11" y1="7" x2="11" y2="9"/></svg>
+    LF
+  </span>
+
+  <!-- SF Tool -->
+  <span data-tip="SQUARE FEET TOOL — Activates a SketchUp measurement tool that lets you pick faces to calculate area. The total SF is saved as a manual measurement for the selected category." class="tip-bottom" style="padding:4px 10px;border-radius:6px;background:#f9e2af;color:#11111b;font-size:11px;font-family:monospace;font-weight:600;cursor:pointer;">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><rect x="2" y="2" width="12" height="12" fill="currentColor" fill-opacity="0.15"/><line x1="2" y1="6" x2="4" y2="6"/><line x1="2" y1="10" x2="4" y2="10"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/></svg>
+    SF
+  </span>
+
+  <div style="width:1px;height:20px;background:#313244;margin:0 4px;"></div>
+
+  <!-- Expand/Collapse -->
+  <span data-tip="EXPAND ALL — Opens every category group in the list so you can see all entities at once." class="tip-bottom" style="padding:4px 8px;border-radius:6px;background:#313244;color:#cdd6f4;font-size:13px;font-family:monospace;cursor:pointer;font-weight:700;">+</span>
+  <span data-tip="COLLAPSE ALL — Closes every category group, showing only the group headers with summary counts." class="tip-bottom" style="padding:4px 8px;border-radius:6px;background:#313244;color:#cdd6f4;font-size:13px;font-family:monospace;cursor:pointer;font-weight:700;">−</span>
+
+  <!-- Debug -->
+  <span data-tip="DEBUG PANEL — Toggles a hidden log panel at the bottom of the dashboard. Shows timestamped messages from the Ruby backend — useful for troubleshooting scan issues or reporting bugs." class="tip-bottom" style="padding:4px 8px;border-radius:6px;background:#313244;color:#7f849c;font-size:10px;font-family:monospace;cursor:pointer;">dbg</span>
+</div>
+
+<!-- ==================== TAB BAR ==================== -->
+<div class="section-label" style="margin:12px 12px 0">Tab Bar</div>
+<div style="display:flex;gap:0;background:#181825;border-bottom:1px solid #313244;">
+  <span data-tip="TAKEOFF TAB — The main view. Shows all scanned entities organized by category with counts, measurements, cost codes, and visibility controls. This is where you do most of your work." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;font-weight:600;color:#cba6f7;border-bottom:2px solid #cba6f7;cursor:pointer;">Takeoff</span>
+  <span data-tip="MEASUREMENTS TAB — Dedicated view for managing measurement data. Filter by type (LF, SF, Elevation, Volume, Count, Wall), add manual measurements, and review calculated values per category." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;color:#7f849c;cursor:pointer;">Measurements</span>
+  <span data-tip="NOTES TAB — Project notes system. Create RFIs, punch items, field notes, change orders, and safety notes. Pin notes to specific entities, assign urgency levels, and track status (Open, In Progress, Blocked, Resolved)." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;color:#7f849c;cursor:pointer;">Notes</span>
+  <span data-tip="ASSEMBLIES TAB — Group related entities into assemblies with beam inventories and parts lists. Create assemblies from visible entities or selections. Export assembly data with quantities and breakdowns." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;color:#7f849c;cursor:pointer;">Assemblies</span>
+  <span data-tip="MULTIVERSE TAB — Model comparison tool. Import a second version of your model and see exactly what changed: added, removed, and modified entities with quantity deltas. Smart diff highlights differences." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;color:#7f849c;cursor:pointer;">Multiverse</span>
+  <span data-tip="CAD TAB — Import CAD overlays (.DWG files) and place gridlines on your model. Manage sheet visibility, create numeric or alphabetic grid systems, and toggle gridline display." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;color:#7f849c;cursor:pointer;">CAD</span>
+</div>
+
+<!-- ==================== SUMMARY STRIP ==================== -->
+<div class="section-label" style="margin:12px 12px 0">Summary Strip</div>
+<div style="display:flex;gap:16px;padding:8px 12px;background:#1e1e2e;border-bottom:1px solid #252535;font-family:monospace;font-size:12px;color:#a6adc8;">
+  <span data-tip="ITEM COUNT — Total number of entities (components/groups) that the scanner found in your model. Each entity is a distinct object like a stud, beam, window, or fixture." style="cursor:help;"><strong style="color:#89b4fa;">2,856</strong> items</span>
+  <span data-tip="CATEGORY COUNT — Number of distinct categories that entities have been assigned to. Categories like 'Wall Framing', 'Drywall', 'Windows' organize your takeoff data." style="cursor:help;"><strong style="color:#89b4fa;">64</strong> categories</span>
+  <span data-tip="UNCATEGORIZED COUNT — Entities the scanner couldn't confidently classify. These appear in red and should be sorted using Hyper Parse or manual category assignment. Goal: get this to zero." style="cursor:help;color:#f38ba8;"><strong>12</strong> uncat</span>
+</div>
+
+<!-- ==================== FILTER BAR ==================== -->
+<div class="section-label" style="margin:12px 12px 0">Filter Bar</div>
+<div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#1e1e2e;border-bottom:1px solid #252535;flex-wrap:wrap;">
+
+  <!-- Eye reset -->
+  <span data-tip="RESET VISIBILITY — Resets all eye toggles and shows every entity in the SketchUp viewport. Same as 'Show All' in the header, but also resets the filter bar visibility states." style="cursor:help;display:flex;align-items:center;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6c7086" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+  </span>
+
+  <!-- Search -->
+  <span data-tip="SEARCH — Type to filter entities by name, definition, material, or tag. Filters in real-time as you type. Works with all other filters simultaneously." style="background:#313244;border-radius:4px;padding:3px 8px;font-size:11px;font-family:monospace;color:#6c7086;cursor:help;min-width:100px;">Search...</span>
+
+  <!-- Category filter -->
+  <span style="font-size:10px;color:#7f849c;font-family:monospace;">Cat:</span>
+  <span data-tip="CATEGORY FILTER — Dropdown to show only entities in a specific category. Select 'All' to see everything, or pick a category like 'Wall Framing' to filter the list." style="background:#313244;border-radius:4px;padding:3px 8px;font-size:11px;font-family:monospace;color:#a6adc8;cursor:help;">All</span>
+
+  <!-- Code filter -->
+  <span style="font-size:10px;color:#7f849c;font-family:monospace;">Code:</span>
+  <span data-tip="COST CODE FILTER — Filter entities by their assigned cost code division. Useful when reviewing specific trade scopes (e.g., all Division 06 Carpentry items)." style="background:#313244;border-radius:4px;padding:3px 8px;font-size:11px;font-family:monospace;color:#a6adc8;cursor:help;">All</span>
+
+  <!-- Sub filter -->
+  <span style="font-size:10px;color:#7f849c;font-family:monospace;">Sub:</span>
+  <span data-tip="SUBCATEGORY FILTER — Filter by subcategory. Subcategories are user-defined labels within categories, like 'Interior' vs 'Exterior' within Wall Framing." style="background:#313244;border-radius:4px;padding:3px 8px;font-size:11px;font-family:monospace;color:#a6adc8;cursor:help;">All</span>
+
+  <div style="width:1px;height:16px;background:#313244;margin:0 2px;"></div>
+
+  <!-- Group by -->
+  <span style="font-size:10px;color:#7f849c;font-family:monospace;">Group:</span>
+  <span data-tip="GROUP BY — Changes how entities are organized in the list. Options: Container (by Revit container/level), Category (default, by FF category), Cost Code (by division), Subcategory, or Measurements." style="background:#313244;border-radius:4px;padding:3px 8px;font-size:11px;font-family:monospace;color:#a6adc8;cursor:help;">Category</span>
+
+  <!-- Filter count -->
+  <span data-tip="FILTER COUNT — Shows how many entities match your current filters vs. the total. 'X / Y' means X shown out of Y total. If these numbers differ, a filter is active." style="margin-left:auto;font-family:monospace;font-size:11px;color:#7f849c;cursor:help;">2,856 / 2,856</span>
+</div>
+
+<!-- ==================== CATEGORY LIST TOOLBAR ==================== -->
+<div class="section-label" style="margin:12px 12px 0">Category List Controls</div>
+<div style="display:flex;align-items:center;gap:8px;padding:6px 12px;background:#1e1e2e;border-bottom:1px solid #252535;">
+  <span data-tip="SELECTION MODE — Toggle between normal mode (clicking a category isolates it) and selection mode (clicking checks a box for multi-select). In selection mode, use the bulk edit bar to modify many entities at once." style="padding:3px 8px;border-radius:4px;background:#313244;font-size:10px;font-family:monospace;color:#a6adc8;cursor:help;">Select Mode</span>
+  <span data-tip="EXPAND ALL CATEGORIES — Opens every category group at once so you can see all entity rows. Useful for scanning through the entire list." style="padding:3px 8px;border-radius:4px;background:#313244;font-size:10px;font-family:monospace;color:#a6adc8;cursor:help;">Expand All</span>
+  <span data-tip="COLLAPSE ALL CATEGORIES — Closes every group, leaving only the compact header rows with category name, count, and total measurement." style="padding:3px 8px;border-radius:4px;background:#313244;font-size:10px;font-family:monospace;color:#a6adc8;cursor:help;">Collapse All</span>
+  <span data-tip="HIDE EMPTY — When toggled on, hides categories with zero entities after filtering. Keeps the list clean when you're focused on specific trades." style="padding:3px 8px;border-radius:4px;background:rgba(203,166,247,0.15);font-size:10px;font-family:monospace;color:#cba6f7;cursor:help;border:1px solid rgba(203,166,247,0.3);">Hide Empty</span>
+</div>
+
+<!-- ==================== CATEGORY GROUP (COLLAPSED) ==================== -->
+<div class="section-label" style="margin:12px 12px 0">Category Group — Collapsed</div>
+<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:hidden;margin-bottom:4px;">
+  <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#181825;cursor:pointer;">
+
+    <!-- Eye toggle -->
+    <span data-tip="EYE TOGGLE (Category) — Click to hide or show all entities in this category in the SketchUp viewport. Filled circle = visible, empty circle = hidden. Lets you visually isolate specific trades." style="color:#a6adc8;font-size:14px;cursor:help;">&#9679;</span>
+
+    <!-- Expand arrow -->
+    <span data-tip="EXPAND/COLLAPSE ARROW — Click to expand this category group and see all individual entities inside. The arrow rotates to indicate open/closed state." style="color:#7f849c;font-size:10px;cursor:help;transform:rotate(-90deg);display:inline-block;">&#9660;</span>
+
+    <!-- Category badge -->
+    <span data-tip="CATEGORY BADGE — The colored label showing which category this group represents. Each category has a unique color derived from the category color map. Click the row to expand and see entities." style="background:#fab387;color:#11111b;font-size:10px;font-weight:700;font-family:monospace;padding:2px 8px;border-radius:4px;cursor:help;">Wall Framing</span>
+
+    <!-- Count -->
+    <span data-tip="ENTITY COUNT — Number of entities (components) in this category group. This counts unique definitions multiplied by instance counts." style="font-size:11px;color:#6c7086;font-family:monospace;cursor:help;">(347)</span>
+
+    <!-- Group total -->
+    <span data-tip="GROUP TOTAL — The summed measurement for all entities in this category, displayed in the category's measurement type. Here: 12,450 linear feet. Click into the group to see individual measurements." style="margin-left:auto;font-size:12px;color:#89b4fa;font-family:monospace;cursor:help;">
+      12,450
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#a6adc8" stroke-width="1.5" stroke-linecap="round" style="vertical-align:middle;"><line x1="2" y1="8" x2="14" y2="8"/><line x1="2" y1="5" x2="2" y2="11"/><line x1="14" y1="5" x2="14" y2="11"/><line x1="5" y1="7" x2="5" y2="9"/><line x1="8" y1="6" x2="8" y2="10"/><line x1="11" y1="7" x2="11" y2="9"/></svg>
+    </span>
+  </div>
+</div>
+
+<!-- ==================== CATEGORY GROUP (EXPANDED) ==================== -->
+<div class="section-label" style="margin:12px 12px 0">Category Group — Expanded</div>
+<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:hidden;margin-bottom:4px;">
+
+  <!-- Group header -->
+  <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#181825;cursor:pointer;">
+    <span style="color:#a6adc8;font-size:14px;">&#9679;</span>
+    <span style="color:#7f849c;font-size:10px;">&#9660;</span>
+    <span style="background:#f9e2af;color:#11111b;font-size:10px;font-weight:700;font-family:monospace;padding:2px 8px;border-radius:4px;">Drywall</span>
+    <span style="font-size:11px;color:#6c7086;font-family:monospace;">(89)</span>
+    <span style="margin-left:auto;font-size:12px;color:#89b4fa;font-family:monospace;">
+      8,234
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#a6adc8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><rect x="2" y="2" width="12" height="12" fill="currentColor" fill-opacity="0.15"/><line x1="2" y1="6" x2="4" y2="6"/><line x1="2" y1="10" x2="4" y2="10"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/></svg>
+    </span>
+  </div>
+
+  <!-- Group toolbar -->
+  <div style="display:flex;align-items:center;gap:8px;padding:6px 12px;background:rgba(24,24,37,0.7);border-bottom:1px solid #252535;">
+    <span style="font-size:10px;color:#7f849c;font-family:monospace;">Unit:</span>
+    <span data-tip="UNIT DROPDOWN — Choose the measurement type for this category. Options: EA (each), LF (linear feet), SF (square feet), SF+CY (square feet + cubic yards), SF+sht (square feet + sheets), EA+BF (each + board feet), EA+SF (each + square feet), ft3 (cubic feet). This determines how quantities are calculated and displayed." style="background:#313244;border-radius:4px;padding:2px 8px;font-size:11px;font-family:monospace;color:#a6adc8;cursor:help;">SF</span>
+
+    <span style="margin-left:auto;display:flex;gap:4px;">
+      <!-- Isolate -->
+      <span data-tip="ISOLATE CATEGORY — Hides everything in the model EXCEPT entities in this category. The quickest way to visually verify that the right objects are assigned. Press 'Show All' or Esc to restore." style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:4px;cursor:help;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/></svg>
+      </span>
+      <!-- Zoom -->
+      <span data-tip="ZOOM TO CATEGORY — Zooms the SketchUp camera to frame all entities in this category. Useful for seeing where these components are located in the model without scrolling the viewport manually." style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:4px;cursor:help;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      <!-- Measure tool -->
+      <span data-tip="MEASURE TOOL (Category) — Activates the SF or LF measurement tool bound to this specific category. Measurements taken are automatically assigned to this category. The icon changes based on the category's unit type." style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:4px;cursor:help;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#f9e2af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="12" height="12" fill="currentColor" fill-opacity="0.15"/><line x1="2" y1="6" x2="4" y2="6"/><line x1="2" y1="10" x2="4" y2="10"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/></svg>
+      </span>
+      <!-- Select All -->
+      <span data-tip="SELECT ALL IN GROUP — Checks every entity in this category. Selected entities appear in the bulk edit bar where you can change their category, cost code, size, or subcategory all at once." style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:4px;cursor:help;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
+      </span>
+      <!-- Exclude -->
+      <span data-tip="EXCLUDE CATEGORY — Moves all entities in this category to '_IGNORE'. Excluded entities are hidden from counts and exports. Use this for elements you don't need in your takeoff (e.g., site context, temp objects)." style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:4px;cursor:help;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f38ba8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </span>
+    </span>
+  </div>
+
+  <!-- Table header -->
+  <div style="display:grid;grid-template-columns:20px 20px 1fr 80px 60px 50px 60px 50px 50px 48px;gap:0;padding:0 12px;background:#262637;font-size:10px;font-family:monospace;color:#6c7086;text-transform:uppercase;letter-spacing:0.5px;">
+    <span data-tip="SELECT ALL CHECKBOX — Check this to select every entity in the group. Selected entities can be bulk-edited using the bulk edit bar that appears above." style="padding:4px 0;cursor:help;text-align:center;">
+      <input type="checkbox" style="accent-color:#cba6f7;width:11px;height:11px;cursor:pointer;" disabled>
+    </span>
+    <span data-tip="EYE COLUMN — Controls individual entity visibility in SketchUp. Each row has its own eye toggle." style="padding:4px 0;cursor:help;text-align:center;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6c7086" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    </span>
+    <span data-tip="CATEGORY COLUMN — The assigned category for each entity. Click the dropdown to reassign an entity to a different category. Includes a '+ Custom...' option to create new categories on the fly." style="padding:4px 0;cursor:help;">Cat</span>
+    <span data-tip="COST CODE COLUMN — The assigned cost code for each entity. Maps to your company's cost code system. Set individually or in bulk." style="padding:4px 0;cursor:help;">Code</span>
+    <span data-tip="NAME COLUMN — The SketchUp definition name (component or group name). Truncated to fit. A yellow '!' icon appears if the entity has warnings." style="padding:4px 0;cursor:help;">Name</span>
+    <span data-tip="SIZE COLUMN — Nominal size (e.g., '2x6', '5/8'). Editable inline — click to type a custom size. Saved to the entity data and included in exports." style="padding:4px 0;cursor:help;">Size</span>
+    <span data-tip="QUANTITY COLUMN — Instance count: how many copies of this component exist in the model. If a component is used 47 times, the qty shows 47." style="padding:4px 0;cursor:help;text-align:right;">Qty</span>
+    <span data-tip="PRIMARY MEASUREMENT — The main calculated measurement based on the category's unit type. For SF categories: total area. For LF: total length. For EA: count. Includes unit icon." style="padding:4px 0;cursor:help;text-align:right;">Primary</span>
+    <span data-tip="SECONDARY MEASUREMENT — An additional measurement for dual-unit categories. For SF+CY: shows cubic yards. For EA+BF: shows board feet. Empty for single-unit categories." style="padding:4px 0;cursor:help;text-align:right;">2nd</span>
+    <span style="padding:4px 0;"></span>
+  </div>
+
+  <!-- Sample entity rows -->
+  <div style="padding:0 12px;">
+    <!-- Row 1 -->
+    <div style="display:grid;grid-template-columns:20px 20px 1fr 80px 60px 50px 60px 50px 50px 48px;gap:0;padding:4px 0;border-bottom:1px solid #222230;font-size:11px;font-family:monospace;align-items:center;">
+      <span style="text-align:center;"><input type="checkbox" style="accent-color:#cba6f7;width:11px;height:11px;" disabled></span>
+      <span data-tip="EYE TOGGLE (Entity) — Hide or show this specific entity in the SketchUp model. Works independently from the category-level eye toggle." style="color:#a6adc8;font-size:12px;cursor:help;text-align:center;">&#9679;</span>
+      <span data-tip="CATEGORY DROPDOWN (Entity) — Click to reassign this entity to any existing category, or choose '+ Custom...' to create a new one. Changes are saved immediately." style="color:#f9e2af;font-size:10px;cursor:help;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Drywall</span>
+      <span data-tip="COST CODE DROPDOWN (Entity) — Assign or change the cost code for this specific entity. Codes come from your cost code library configured in the Cost Code Editor." style="color:#a6adc8;font-size:10px;cursor:help;">09.29.00</span>
+      <span data-tip="ENTITY NAME — The SketchUp component definition name. Click the row to select the entity in the model." style="color:#cdd6f4;font-size:11px;cursor:help;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Interior Wall Panel 5...</span>
+      <span data-tip="SIZE INPUT — Click to edit the nominal size. Type values like '2x6', '5/8', or '4in'. Press Enter to save. Size data is included in exports." style="color:#a6adc8;font-size:10px;cursor:help;">5/8"</span>
+      <span style="text-align:right;color:#cdd6f4;font-size:11px;">12</span>
+      <span style="text-align:right;color:#cdd6f4;font-size:11px;">384
+        <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="#a6adc8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><rect x="2" y="2" width="12" height="12" fill="currentColor" fill-opacity="0.15"/></svg>
+      </span>
+      <span style="text-align:right;color:#7f849c;font-size:10px;">—</span>
+      <span style="display:flex;gap:2px;justify-content:flex-end;">
+        <span data-tip="ISOLATE ENTITY — Hide everything except this one entity. Useful for finding a specific component in a complex model." style="cursor:help;display:flex;align-items:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#585b70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/></svg>
+        </span>
+        <span data-tip="ZOOM TO ENTITY — Zooms the camera directly to this entity in the SketchUp model. Selects it and frames it in the viewport." style="cursor:help;display:flex;align-items:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#585b70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+      </span>
+    </div>
+
+    <!-- Row 2 (selected) -->
+    <div style="display:grid;grid-template-columns:20px 20px 1fr 80px 60px 50px 60px 50px 50px 48px;gap:0;padding:4px 0;border-bottom:1px solid #222230;font-size:11px;font-family:monospace;align-items:center;background:#2d2050;border-radius:2px;">
+      <span style="text-align:center;"><input type="checkbox" checked style="accent-color:#cba6f7;width:11px;height:11px;" disabled></span>
+      <span style="color:#a6adc8;font-size:12px;text-align:center;">&#9679;</span>
+      <span style="color:#f9e2af;font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Drywall</span>
+      <span style="color:#a6adc8;font-size:10px;">09.29.00</span>
+      <span data-tip="SELECTED ROW — This row is selected (purple highlight). Selected entities appear in the bulk edit bar above. You can shift-click to select ranges, or use the group checkbox to select all." style="color:#cdd6f4;font-size:11px;cursor:help;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Ceiling Panel Type A...</span>
+      <span style="color:#a6adc8;font-size:10px;">1/2"</span>
+      <span style="text-align:right;color:#cdd6f4;font-size:11px;">8</span>
+      <span style="text-align:right;color:#cdd6f4;font-size:11px;">256</span>
+      <span style="text-align:right;color:#7f849c;font-size:10px;">—</span>
+      <span style="display:flex;gap:2px;justify-content:flex-end;">
+        <span style="display:flex;align-items:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#585b70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/></svg></span>
+        <span style="display:flex;align-items:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#585b70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      </span>
+    </div>
+
+    <!-- Row 3 with warning -->
+    <div style="display:grid;grid-template-columns:20px 20px 1fr 80px 60px 50px 60px 50px 50px 48px;gap:0;padding:4px 0;border-bottom:1px solid #222230;font-size:11px;font-family:monospace;align-items:center;">
+      <span style="text-align:center;"><input type="checkbox" style="accent-color:#cba6f7;width:11px;height:11px;" disabled></span>
+      <span style="color:#45475a;font-size:12px;text-align:center;">&#9675;</span>
+      <span style="color:#f9e2af;font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Drywall</span>
+      <span data-tip="FLAGGED COST CODE — Orange border means the scanner suggested multiple possible cost codes and none has been assigned. Review and pick the correct one." style="color:#fab387;font-size:10px;cursor:help;border:1px solid #fab387;border-radius:3px;padding:0 4px;">?</span>
+      <span style="color:#cdd6f4;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+        Shaft Wall Assembly...
+        <span data-tip="WARNING INDICATOR — This entity has warnings. Common warnings: non-manifold geometry (can't calculate volume), zero-area faces, or missing material. Hover in the actual dashboard to see details." style="color:#f9e2af;font-weight:700;cursor:help;font-size:12px;">!</span>
+      </span>
+      <span style="color:#a6adc8;font-size:10px;">—</span>
+      <span style="text-align:right;color:#cdd6f4;font-size:11px;">3</span>
+      <span style="text-align:right;color:#cdd6f4;font-size:11px;">96</span>
+      <span style="text-align:right;color:#7f849c;font-size:10px;">—</span>
+      <span style="display:flex;gap:2px;justify-content:flex-end;">
+        <span style="display:flex;align-items:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#585b70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/></svg></span>
+        <span style="display:flex;align-items:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#585b70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== BULK EDIT BAR ==================== -->
+<div class="section-label" style="margin:20px 12px 0">Bulk Edit Bar (appears when entities are selected)</div>
+<div style="margin:0 8px;border:2px solid #cba6f7;border-radius:8px;overflow:hidden;background:#181825;margin-bottom:4px;">
+  <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;flex-wrap:wrap;">
+
+    <span data-tip="SELECTION COUNT — Shows how many entities are currently selected across all groups. These are the entities that will be affected by bulk edit actions." style="font-family:monospace;font-size:12px;color:#cba6f7;font-weight:700;cursor:help;">3 sel</span>
+
+    <div style="width:1px;height:16px;background:#313244;margin:0 2px;"></div>
+
+    <span style="font-size:10px;color:#7f849c;font-family:monospace;">Cat:</span>
+    <span data-tip="BULK SET CATEGORY — Choose a category from the dropdown and click 'Set' to reassign ALL selected entities to that category. Includes '+ Custom...' to create a new category." style="background:#313244;border-radius:4px;padding:2px 8px;font-size:11px;font-family:monospace;color:#a6adc8;cursor:help;">Drywall</span>
+    <span data-tip="SET BUTTON (Category) — Applies the selected category to all checked entities at once. This is the fastest way to recategorize many items." style="padding:2px 8px;border-radius:4px;background:#cba6f7;color:#11111b;font-size:10px;font-weight:700;font-family:monospace;cursor:help;">Set</span>
+
+    <span style="font-size:10px;color:#7f849c;font-family:monospace;">Code:</span>
+    <span data-tip="BULK SET COST CODE — Select a cost code and click 'Set' to assign it to all selected entities." style="background:#313244;border-radius:4px;padding:2px 8px;font-size:11px;font-family:monospace;color:#a6adc8;cursor:help;">09.29.00</span>
+    <span style="padding:2px 8px;border-radius:4px;background:#cba6f7;color:#11111b;font-size:10px;font-weight:700;font-family:monospace;">Set</span>
+
+    <span style="font-size:10px;color:#7f849c;font-family:monospace;">Size:</span>
+    <span data-tip="BULK SET SIZE — Type a size value and press Enter to apply it to all selected entities (e.g., '2x6', '5/8')." style="background:#313244;border-radius:4px;padding:2px 8px;font-size:11px;font-family:monospace;color:#6c7086;cursor:help;min-width:40px;">—</span>
+
+    <span style="font-size:10px;color:#7f849c;font-family:monospace;">Sub:</span>
+    <span data-tip="BULK SET SUBCATEGORY — Type a subcategory label (e.g., 'Interior', 'Exterior', 'Level 2') and press Enter to apply it to all selected entities." style="background:#313244;border-radius:4px;padding:2px 8px;font-size:11px;font-family:monospace;color:#6c7086;cursor:help;min-width:40px;">—</span>
+
+    <div style="width:1px;height:16px;background:#313244;margin:0 2px;"></div>
+
+    <span data-tip="BULK EXCLUDE — Moves all selected entities to the '_IGNORE' category. They'll be hidden from counts, measurements, and exports. Use for objects you don't need in the takeoff." style="padding:2px 8px;border-radius:4px;background:#313244;color:#f38ba8;font-size:10px;font-weight:600;font-family:monospace;cursor:help;">Exclude</span>
+
+    <span data-tip="DESELECT ALL — Clears the selection and hides the bulk edit bar. No changes are made — this just unchecks everything." style="padding:2px 8px;border-radius:4px;background:#313244;color:#a6adc8;font-size:10px;font-family:monospace;cursor:help;">Deselect</span>
+  </div>
+</div>
+
+<!-- ==================== MULTI-ISOLATE PANEL ==================== -->
+<div class="section-label" style="margin:20px 12px 0">Multi-Isolate Panel (toggled from header)</div>
+<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:hidden;background:#181825;margin-bottom:4px;">
+  <div style="padding:10px 12px;max-height:140px;overflow-y:auto;display:flex;flex-wrap:wrap;gap:6px;">
+    <label data-tip="CATEGORY CHECKBOX — Check categories you want to include in a multi-isolate, multi-hide, or multi-highlight operation. The colored badge shows the category name and entity count." style="display:flex;align-items:center;gap:4px;cursor:help;">
+      <input type="checkbox" checked style="accent-color:#cba6f7;width:11px;height:11px;" disabled>
+      <span style="background:#f9e2af;color:#11111b;font-size:9px;font-weight:700;font-family:monospace;padding:1px 6px;border-radius:3px;">Drywall <span style="opacity:0.7">89</span></span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;">
+      <input type="checkbox" checked style="accent-color:#cba6f7;width:11px;height:11px;" disabled>
+      <span style="background:#fab387;color:#11111b;font-size:9px;font-weight:700;font-family:monospace;padding:1px 6px;border-radius:3px;">Wall Framing <span style="opacity:0.7">347</span></span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;">
+      <input type="checkbox" style="accent-color:#cba6f7;width:11px;height:11px;" disabled>
+      <span style="background:#64b4ff;color:#11111b;font-size:9px;font-weight:700;font-family:monospace;padding:1px 6px;border-radius:3px;">Windows <span style="opacity:0.7">52</span></span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;">
+      <input type="checkbox" style="accent-color:#cba6f7;width:11px;height:11px;" disabled>
+      <span style="background:#a07850;color:#fff;font-size:9px;font-weight:700;font-family:monospace;padding:1px 6px;border-radius:3px;">Doors <span style="opacity:0.7">28</span></span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;">
+      <input type="checkbox" style="accent-color:#cba6f7;width:11px;height:11px;" disabled>
+      <span style="background:#8cb4dc;color:#11111b;font-size:9px;font-weight:700;font-family:monospace;padding:1px 6px;border-radius:3px;">Metal Roofing <span style="opacity:0.7">31</span></span>
+    </label>
+    <label style="display:flex;align-items:center;gap:4px;">
+      <input type="checkbox" style="accent-color:#cba6f7;width:11px;height:11px;" disabled>
+      <span style="background:#aaa;color:#11111b;font-size:9px;font-weight:700;font-family:monospace;padding:1px 6px;border-radius:3px;">Concrete <span style="opacity:0.7">67</span></span>
+    </label>
+  </div>
+  <div style="display:flex;gap:6px;padding:8px 12px;border-top:1px solid #313244;">
+    <span data-tip="MULTI-ISOLATE — Show ONLY the checked categories in the SketchUp model. Everything else is hidden. Great for reviewing multiple trades at once (e.g., framing + sheathing together)." style="padding:3px 10px;border-radius:4px;background:#a6e3a1;color:#11111b;font-size:10px;font-weight:700;font-family:monospace;cursor:help;">Isolate</span>
+    <span data-tip="MULTI-HIDE — Hide the checked categories and keep everything else visible. The inverse of isolate — useful for removing clutter (e.g., hide Generic Models and _IGNORE to see the real work)." style="padding:3px 10px;border-radius:4px;background:#313244;color:#f38ba8;font-size:10px;font-weight:600;font-family:monospace;cursor:help;">Hide</span>
+    <span data-tip="MULTI-HIGHLIGHT — Apply colored overlays to the checked categories without hiding anything. Entities get highlighted in their category color so you can see spatial relationships between trades." style="padding:3px 10px;border-radius:4px;background:#cba6f7;color:#11111b;font-size:10px;font-weight:700;font-family:monospace;cursor:help;">Highlight</span>
+    <span data-tip="SELECT ALL — Check every category checkbox in the panel." style="padding:3px 10px;border-radius:4px;background:#313244;color:#a6adc8;font-size:10px;font-family:monospace;cursor:help;">All</span>
+    <span data-tip="SELECT NONE — Uncheck every category checkbox in the panel." style="padding:3px 10px;border-radius:4px;background:#313244;color:#a6adc8;font-size:10px;font-family:monospace;cursor:help;">None</span>
+    <span data-tip="CLOSE PANEL — Hides the multi-isolate panel. The panel doesn't affect visibility on its own — you must click Isolate, Hide, or Highlight to take action." style="padding:3px 10px;border-radius:4px;background:#313244;color:#a6adc8;font-size:10px;font-family:monospace;cursor:help;">Close</span>
+  </div>
+</div>
+
+<!-- ==================== SCAN OVERLAY ==================== -->
+<div class="section-label" style="margin:20px 12px 0">Scan Overlay (appears during model scan)</div>
+<div style="margin:0 8px;border:1px solid #45475a;border-radius:12px;overflow:hidden;background:#181825;padding:20px;text-align:center;margin-bottom:12px;">
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;">
+    <span data-tip="SCAN SPINNER — Animated loading indicator that spins while the scanner is processing your model. Stops and changes color when the scan completes." style="width:20px;height:20px;border:2px solid #313244;border-top-color:#cba6f7;border-radius:50%;display:inline-block;cursor:help;"></span>
+    <span data-tip="SCAN TITLE — Shows the current scan state. 'Scanning Model...' during processing, then changes to 'Scan Complete' with a summary of what was found." style="font-family:monospace;font-size:14px;font-weight:600;color:#cdd6f4;cursor:help;">Scanning Model...</span>
+  </div>
+  <div style="text-align:left;font-family:monospace;font-size:11px;line-height:1.8;color:#a6adc8;">
+    <div data-tip="SCAN LOG — Real-time messages from the scanner showing what it's doing. Blue messages are status updates, yellow are warnings, green means steps completed successfully." style="cursor:help;">
+      <span style="color:#6c7086;">0.2s</span> <span style="color:#89b4fa;">Collecting entities...</span><br>
+      <span style="color:#6c7086;">1.1s</span> <span style="color:#89b4fa;">Found 2,856 components in 3 containers</span><br>
+      <span style="color:#6c7086;">2.3s</span> <span style="color:#f9e2af;">Warning: 12 entities have non-manifold geometry</span><br>
+      <span style="color:#6c7086;">3.8s</span> <span style="color:#a6e3a1;">Classification complete — 64 categories assigned</span>
+    </div>
+  </div>
+</div>
+
+</div>
+<!-- END DASHBOARD MOCK-UP -->
+
+<!-- LEGEND -->
+<div style="margin-top:40px;padding:24px;background:#181825;border:1px solid #313244;border-radius:12px;">
+  <h3 style="font-size:16px;font-weight:700;margin:0 0 16px;color:#cdd6f4;">Icon Legend</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/></svg>
+      <span>Isolate (crosshair)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>Zoom (magnifier)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#89b4fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
+      <span>Select All (cursor)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f38ba8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <span>Exclude (X mark)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#f9e2af" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="8" x2="14" y2="8"/><line x1="2" y1="5" x2="2" y2="11"/><line x1="14" y1="5" x2="14" y2="11"/><line x1="5" y1="7" x2="5" y2="9"/><line x1="8" y1="6" x2="8" y2="10"/><line x1="11" y1="7" x2="11" y2="9"/></svg>
+      <span>Linear Feet (ruler)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#f9e2af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="12" height="12" fill="currentColor" fill-opacity="0.15"/><line x1="2" y1="6" x2="4" y2="6"/><line x1="2" y1="10" x2="4" y2="10"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/></svg>
+      <span>Square Feet (area)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a6adc8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      <span>Eye (visibility toggle)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <span style="color:#f9e2af;font-weight:700;font-size:14px;">!</span>
+      <span>Warning indicator</span>
+    </div>
+  </div>
+</div>
+
+<!-- COLOR LEGEND -->
+<div style="margin-top:20px;padding:24px;background:#181825;border:1px solid #313244;border-radius:12px;">
+  <h3 style="font-size:16px;font-weight:700;margin:0 0 16px;color:#cdd6f4;">Button Colors</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <span style="width:32px;height:20px;border-radius:4px;background:#cba6f7;display:inline-block;flex-shrink:0;"></span>
+      Purple — Primary action
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <span style="width:32px;height:20px;border-radius:4px;background:#a6e3a1;display:inline-block;flex-shrink:0;"></span>
+      Green — Isolate / Show
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <span style="width:32px;height:20px;border-radius:4px;background:#f9e2af;display:inline-block;flex-shrink:0;"></span>
+      Yellow — Measurement tools
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <span style="width:32px;height:20px;border-radius:4px;background:#313244;display:inline-block;flex-shrink:0;"></span>
+      Gray — Standard action
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <span style="width:32px;height:20px;border-radius:4px;background:#313244;display:inline-block;flex-shrink:0;border:1px solid #f38ba8;"></span>
+      Red text — Destructive / Hide
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#a6adc8;">
+      <span style="width:32px;height:20px;border-radius:4px;background:#2d2050;display:inline-block;flex-shrink:0;border:1px solid #45475a;"></span>
+      Purple tint — Selected row
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div style="margin-top:40px;padding-top:20px;border-top:1px solid #313244;text-align:center;font-size:12px;color:#7f849c">
+  <p style="margin:0">Form and Field v11 — March 2026</p>
+  <p style="margin:4px 0 0"><a href="mailto:support@form-field.com" style="color:#cba6f7;text-decoration:none">support@form-field.com</a></p>
+</div>
+
+</div>
+</body>
+</html>
