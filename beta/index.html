@@ -55,19 +55,28 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:'Segoe UI',system-ui,sans-seri
     <p style="font-size:12px;color:#7f849c;margin-top:10px;text-align:center;font-family:monospace;">Install: Extensions → Extension Manager → Install Extension</p>
   </div>
 
-  <!-- License Key -->
+  <!-- Beta Discount -->
   <div style="padding:24px;background:#181825;border:1px solid #313244;border-radius:14px;margin-bottom:16px;">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-      <div style="width:44px;height:44px;border-radius:10px;background:rgba(203,166,247,0.12);color:#cba6f7;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:15px;flex-shrink:0;">LK</div>
+      <div style="width:44px;height:44px;border-radius:10px;background:rgba(203,166,247,0.12);color:#cba6f7;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:15px;flex-shrink:0;">&#9733;</div>
       <div>
-        <div style="font-size:16px;font-weight:600;color:#cdd6f4;">Beta License Key</div>
-        <div style="font-size:12px;color:#7f849c;font-family:monospace;">Valid through beta period</div>
+        <div style="font-size:16px;font-weight:600;color:#cdd6f4;">Beta Tester Discount</div>
+        <div style="font-size:12px;color:#7f849c;font-family:monospace;">Exclusive pricing for testers</div>
       </div>
     </div>
-    <div style="background:#313244;border-radius:8px;padding:14px 16px;font-family:monospace;font-size:14px;color:#f9e2af;text-align:center;letter-spacing:1px;word-break:break-all;" id="licenseKey">
-      FF-BETA-XXXX-XXXX-XXXX
+    <div style="margin-bottom:12px;">
+      <div style="font-size:12px;color:#7f849c;font-family:monospace;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Discount Code</div>
+      <div style="background:#313244;border-radius:8px;padding:14px 16px;font-family:monospace;font-size:16px;color:#f9e2af;text-align:center;letter-spacing:2px;font-weight:700;" id="discountCode">GXMDK1MW</div>
+      <button onclick="copyDiscount()" id="copyDiscountBtn" style="display:block;width:100%;margin-top:8px;padding:8px;border-radius:8px;background:transparent;color:#7f849c;font-family:monospace;font-size:12px;border:1px solid #313244;cursor:pointer;">Copy code</button>
     </div>
-    <button onclick="copyKey()" id="copyBtn" style="display:block;width:100%;margin-top:10px;padding:8px;border-radius:8px;background:transparent;color:#7f849c;font-family:monospace;font-size:12px;border:1px solid #313244;cursor:pointer;">Copy to clipboard</button>
+    <a href="https://formfield.lemonsqueezy.com/checkout/buy/20bf4834-32d8-40d7-9546-13e3dd170b07" target="_blank" style="display:block;text-align:center;padding:14px;border-radius:10px;background:#cba6f7;color:#11111b;font-weight:600;font-size:15px;text-decoration:none;margin-top:12px;">Purchase with Beta Discount</a>
+    <p style="font-size:11px;color:#7f849c;margin-top:8px;text-align:center;">Apply the code at checkout for your beta tester price.</p>
+  </div>
+
+  <!-- Tester ID -->
+  <div style="padding:14px 24px;background:#181825;border:1px solid #313244;border-radius:14px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;">
+    <span style="font-size:12px;color:#7f849c;font-family:monospace;">Logged in as:</span>
+    <span style="font-size:13px;color:#a6e3a1;font-family:monospace;font-weight:600;" id="testerLabel"></span>
   </div>
 
   <!-- Quick Links -->
@@ -130,21 +139,30 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:'Segoe UI',system-ui,sans-seri
 </div>
 
 <script>
-// ═══ CHANGE THIS PASSWORD ═══
-var BETA_CODE = 'ff-beta-2026';
-// ═══════════════════════════
+// ═══ 10 UNIQUE BETA ACCESS CODES ═══
+// Each code maps to a tester label so you can track who used what.
+// Give one code to each tester.
+var BETA_CODES = {
+  'timber-alpha':    'Tester 1',
+  'rafter-bravo':    'Tester 2',
+  'truss-charlie':   'Tester 3',
+  'joist-delta':     'Tester 4',
+  'purlin-echo':     'Tester 5',
+  'beam-foxtrot':    'Tester 6',
+  'stud-golf':       'Tester 7',
+  'slab-hotel':      'Tester 8',
+  'ridge-india':     'Tester 9',
+  'chord-juliet':    'Tester 10'
+};
+// ════════════════════════════════════
 
-// ═══ CHANGE THIS LICENSE KEY ═══
-var LICENSE_KEY = 'FF-BETA-XXXX-XXXX-XXXX';
-// ════════════════════════════════
+var activeTester = null;
 
 function tryUnlock() {
-  var input = document.getElementById('passInput').value.trim();
-  if (input === BETA_CODE) {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    document.getElementById('licenseKey').textContent = LICENSE_KEY;
-    try { sessionStorage.setItem('ff-beta', '1'); } catch(e) {}
+  var input = document.getElementById('passInput').value.trim().toLowerCase();
+  if (BETA_CODES[input]) {
+    activeTester = BETA_CODES[input];
+    showDashboard(input);
   } else {
     document.getElementById('error').style.display = 'block';
     document.getElementById('passInput').style.borderColor = '#f38ba8';
@@ -155,12 +173,23 @@ function tryUnlock() {
   }
 }
 
+function showDashboard(code) {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('testerLabel').textContent = activeTester + ' (' + code + ')';
+  try {
+    sessionStorage.setItem('ff-beta', '1');
+    sessionStorage.setItem('ff-beta-code', code);
+    sessionStorage.setItem('ff-beta-tester', activeTester);
+  } catch(e) {}
+}
+
 // Auto-unlock if already entered this session
 try {
   if (sessionStorage.getItem('ff-beta') === '1') {
-    document.getElementById('gate').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    document.getElementById('licenseKey').textContent = LICENSE_KEY;
+    var savedCode = sessionStorage.getItem('ff-beta-code') || '';
+    activeTester = sessionStorage.getItem('ff-beta-tester') || 'Tester';
+    showDashboard(savedCode);
   }
 } catch(e) {}
 
@@ -169,12 +198,12 @@ document.getElementById('passInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') tryUnlock();
 });
 
-function copyKey() {
-  var key = document.getElementById('licenseKey').textContent;
-  navigator.clipboard.writeText(key).then(function() {
-    document.getElementById('copyBtn').textContent = 'Copied!';
+function copyDiscount() {
+  var code = document.getElementById('discountCode').textContent;
+  navigator.clipboard.writeText(code).then(function() {
+    document.getElementById('copyDiscountBtn').textContent = 'Copied!';
     setTimeout(function() {
-      document.getElementById('copyBtn').textContent = 'Copy to clipboard';
+      document.getElementById('copyDiscountBtn').textContent = 'Copy code';
     }, 1500);
   });
 }
@@ -183,8 +212,9 @@ function submitBug() {
   var title = document.getElementById('bugTitle').value.trim();
   var desc = document.getElementById('bugDesc').value.trim();
   if (!title) return;
-  var body = 'Bug: ' + title + '\n\n' + desc + '\n\n---\nSent from FF Beta Portal';
-  window.location.href = 'mailto:support@form-field.com?subject=' + encodeURIComponent('[FF Beta Bug] ' + title) + '&body=' + encodeURIComponent(body);
+  var tester = activeTester || 'Unknown';
+  var body = 'Bug: ' + title + '\n\n' + desc + '\n\nTester: ' + tester + '\n---\nSent from FF Beta Portal';
+  window.location.href = 'mailto:support@form-field.com?subject=' + encodeURIComponent('[FF Beta Bug] ' + title + ' — ' + tester) + '&body=' + encodeURIComponent(body);
   document.getElementById('bugBtn').textContent = 'Opening email client...';
   setTimeout(function() {
     document.getElementById('bugBtn').textContent = 'Submit Report';
