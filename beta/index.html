@@ -42,10 +42,10 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:'Segoe UI',system-ui,sans-seri
     <p style="font-size:14px;color:#a6adc8;">Thanks for testing. Your feedback shapes the product.</p>
   </div>
 
-  <!-- Beta Discount -->
-  <div style="padding:24px;background:#181825;border:1px solid #313244;border-radius:14px;margin-bottom:16px;">
+  <!-- Beta Discount (hidden until terms agreed) -->
+  <div id="discountSection" style="display:none;padding:24px;background:#181825;border:1px solid rgba(166,227,161,0.3);border-radius:14px;margin-bottom:16px;">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-      <div style="width:44px;height:44px;border-radius:10px;background:rgba(203,166,247,0.12);color:#cba6f7;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:15px;flex-shrink:0;">&#9733;</div>
+      <div style="width:44px;height:44px;border-radius:10px;background:rgba(203,166,247,0.12);color:#cba6f7;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:15px;flex-shrink:0;">FF</div>
       <div>
         <div style="font-size:16px;font-weight:600;color:#cdd6f4;">Beta Tester Discount</div>
         <div style="font-size:12px;color:#7f849c;font-family:monospace;">Exclusive pricing for testers</div>
@@ -116,42 +116,50 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:'Segoe UI',system-ui,sans-seri
     </div>
   </div>
 
-  <!-- Beta Terms -->
+  <!-- Beta Terms (collapsible) -->
   <div style="padding:24px;background:#181825;border:1px solid #313244;border-radius:14px;margin-top:16px;">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-      <div style="width:44px;height:44px;border-radius:10px;background:rgba(108,112,134,0.15);color:#7f849c;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:15px;flex-shrink:0;">&sect;</div>
-      <div>
+    <div onclick="toggleTerms()" style="display:flex;align-items:center;gap:12px;cursor:pointer;">
+      <div style="width:44px;height:44px;border-radius:10px;background:rgba(108,112,134,0.15);color:#7f849c;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:15px;flex-shrink:0;">TOS</div>
+      <div style="flex:1;">
         <div style="font-size:16px;font-weight:600;color:#cdd6f4;">Beta Program Agreement</div>
-        <div style="font-size:12px;color:#7f849c;font-family:monospace;">By using the Beta Software you agree to these terms</div>
+        <div style="font-size:12px;color:#7f849c;font-family:monospace;">Review and accept to unlock beta pricing</div>
       </div>
+      <span id="termsChev" style="font-size:12px;color:#6c7086;transition:transform 0.2s;">&#9660;</span>
     </div>
 
-    <div style="font-size:12px;color:#a6adc8;line-height:1.7;">
-      <p style="margin:0 0 12px;">This Beta Program Agreement ("Agreement") governs your participation in the Form and Field beta testing program ("Beta Program"). By accessing, downloading, or using Form and Field beta software ("Beta Software"), you agree to the following terms.</p>
+    <div id="termsBody" style="display:none;margin-top:16px;">
+      <div style="font-size:12px;color:#a6adc8;line-height:1.7;max-height:300px;overflow-y:auto;padding-right:8px;border:1px solid #313244;border-radius:8px;padding:16px;">
+        <p style="margin:0 0 12px;">This Beta Program Agreement ("Agreement") governs your participation in the Form and Field beta testing program ("Beta Program"). By accessing, downloading, or using Form and Field beta software ("Beta Software"), you agree to the following terms.</p>
 
-      <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.1 Beta Software</strong></p>
-      <p style="margin:0 0 12px;">The Beta Software is a pre-release version of Form and Field, a SketchUp extension for construction takeoff and quantity measurement. It is provided for evaluation and testing purposes only. The Beta Software may contain bugs, errors, defects, or incomplete features. It is not intended for use as a primary or sole source of construction estimating data on active projects.</p>
+        <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.1 Beta Software</strong></p>
+        <p style="margin:0 0 12px;">The Beta Software is a pre-release version of Form and Field, a SketchUp extension for construction takeoff and quantity measurement. It is provided for evaluation and testing purposes only. The Beta Software may contain bugs, errors, defects, or incomplete features. It is not intended for use as a primary or sole source of construction estimating data on active projects.</p>
 
-      <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.2 "As Is" — No Warranty</strong></p>
-      <p style="margin:0 0 12px;">The Beta Software is provided "AS IS" and "AS AVAILABLE" without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, accuracy of calculations, or non-infringement. Form and Field makes no representations or guarantees regarding the accuracy, completeness, or reliability of any measurements, quantities, cost calculations, or other data generated by the Beta Software.</p>
+        <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.2 "As Is" — No Warranty</strong></p>
+        <p style="margin:0 0 12px;">The Beta Software is provided "AS IS" and "AS AVAILABLE" without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, accuracy of calculations, or non-infringement. Form and Field makes no representations or guarantees regarding the accuracy, completeness, or reliability of any measurements, quantities, cost calculations, or other data generated by the Beta Software.</p>
 
-      <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.3 Limitation of Liability</strong></p>
-      <p style="margin:0 0 12px;">In no event shall Form and Field, its developer, or affiliates be liable for any direct, indirect, incidental, special, consequential, or exemplary damages arising from or related to your use of the Beta Software. This includes, without limitation, damages arising from inaccurate takeoff data, incorrect cost calculations, model corruption, data loss, project delays, bid inaccuracies, or any other consequence of relying on Beta Software output. You assume all risk associated with using the Beta Software.</p>
+        <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.3 Limitation of Liability</strong></p>
+        <p style="margin:0 0 12px;">In no event shall Form and Field, its developer, or affiliates be liable for any direct, indirect, incidental, special, consequential, or exemplary damages arising from or related to your use of the Beta Software. This includes, without limitation, damages arising from inaccurate takeoff data, incorrect cost calculations, model corruption, data loss, project delays, bid inaccuracies, or any other consequence of relying on Beta Software output. You assume all risk associated with using the Beta Software.</p>
 
-      <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.4 Feedback</strong></p>
-      <p style="margin:0 0 12px;">Any feedback, bug reports, suggestions, ideas, or other information you provide regarding the Beta Software ("Feedback") may be used by Form and Field without restriction, obligation, or compensation. You grant Form and Field a perpetual, irrevocable, worldwide, royalty-free license to use, modify, and incorporate any Feedback into the product.</p>
+        <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.4 Feedback</strong></p>
+        <p style="margin:0 0 12px;">Any feedback, bug reports, suggestions, ideas, or other information you provide regarding the Beta Software ("Feedback") may be used by Form and Field without restriction, obligation, or compensation. You grant Form and Field a perpetual, irrevocable, worldwide, royalty-free license to use, modify, and incorporate any Feedback into the product.</p>
 
-      <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.5 License and Access</strong></p>
-      <p style="margin:0 0 12px;">Your participation in the Beta Program is at the sole discretion of Form and Field. We may revoke your access, modify the Beta Software, or terminate the Beta Program at any time, for any reason, without notice. Beta licenses are non-transferable and may not be shared, resold, or distributed. The Beta Software is licensed, not sold.</p>
+        <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.5 License and Access</strong></p>
+        <p style="margin:0 0 12px;">Your participation in the Beta Program is at the sole discretion of Form and Field. We may revoke your access, modify the Beta Software, or terminate the Beta Program at any time, for any reason, without notice. Beta licenses are non-transferable and may not be shared, resold, or distributed. The Beta Software is licensed, not sold.</p>
 
-      <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.6 Confidentiality</strong></p>
-      <p style="margin:0 0 12px;">The Beta Software and its features may contain proprietary information. You agree not to reverse engineer, decompile, disassemble, or attempt to extract source code from the Beta Software. You may share your experience using the product publicly but may not redistribute the software itself.</p>
+        <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.6 Confidentiality</strong></p>
+        <p style="margin:0 0 12px;">The Beta Software and its features may contain proprietary information. You agree not to reverse engineer, decompile, disassemble, or attempt to extract source code from the Beta Software. You may share your experience using the product publicly but may not redistribute the software itself.</p>
 
-      <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.7 Transition to Paid Product</strong></p>
-      <p style="margin:0 0 12px;">The Beta Program is temporary. When Form and Field launches commercially, beta access will end and continued use will require a paid subscription. Beta testers may receive promotional pricing at the sole discretion of Form and Field, but no ongoing free access is guaranteed.</p>
+        <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.7 Transition to Paid Product</strong></p>
+        <p style="margin:0 0 12px;">The Beta Program is temporary. When Form and Field launches commercially, beta access will end and continued use will require a paid subscription. Beta testers may receive promotional pricing at the sole discretion of Form and Field, but no ongoing free access is guaranteed.</p>
 
-      <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.8 Indemnification</strong></p>
-      <p style="margin:0 0 0;">You agree to indemnify and hold harmless Form and Field and its developer from any claims, damages, losses, or expenses arising from your use of the Beta Software, including any reliance on its output for construction estimating, bidding, or project management purposes.</p>
+        <p style="margin:0 0 4px;"><strong style="color:#cdd6f4;">1.8 Indemnification</strong></p>
+        <p style="margin:0 0 0;">You agree to indemnify and hold harmless Form and Field and its developer from any claims, damages, losses, or expenses arising from your use of the Beta Software, including any reliance on its output for construction estimating, bidding, or project management purposes.</p>
+      </div>
+
+      <label onclick="agreeToggle()" style="display:flex;align-items:center;gap:10px;margin-top:14px;cursor:pointer;padding:10px 12px;border-radius:8px;background:#313244;">
+        <input type="checkbox" id="agreeCheck" style="accent-color:#a6e3a1;width:16px;height:16px;cursor:pointer;">
+        <span style="font-size:13px;color:#cdd6f4;font-weight:500;">I have read and agree to the Beta Program Agreement</span>
+      </label>
     </div>
   </div>
 
@@ -216,6 +224,10 @@ try {
     var savedCode = sessionStorage.getItem('ff-beta-code') || '';
     activeTester = sessionStorage.getItem('ff-beta-tester') || 'Tester';
     showDashboard(savedCode);
+    if (sessionStorage.getItem('ff-beta-agreed') === '1') {
+      document.getElementById('agreeCheck').checked = true;
+      document.getElementById('discountSection').style.display = 'block';
+    }
   }
 } catch(e) {}
 
@@ -223,6 +235,29 @@ try {
 document.getElementById('passInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') tryUnlock();
 });
+
+function toggleTerms() {
+  var body = document.getElementById('termsBody');
+  var chev = document.getElementById('termsChev');
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+    chev.style.transform = 'rotate(180deg)';
+  } else {
+    body.style.display = 'none';
+    chev.style.transform = 'rotate(0deg)';
+  }
+}
+
+function agreeToggle() {
+  setTimeout(function() {
+    var checked = document.getElementById('agreeCheck').checked;
+    document.getElementById('discountSection').style.display = checked ? 'block' : 'none';
+    try {
+      if (checked) { sessionStorage.setItem('ff-beta-agreed', '1'); }
+      else { sessionStorage.removeItem('ff-beta-agreed'); }
+    } catch(e) {}
+  }, 10);
+}
 
 function copyDiscount() {
   var code = document.getElementById('discountCode').textContent;
