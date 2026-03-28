@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Beta Program — Form and Field</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{background:#1e1e2e;color:#cdd6f4;font-family:'Segoe UI',system-ui,sans-serif;line-height:1.7;min-height:100vh;}
+</style>
+</head>
+<body>
+<div style="max-width:640px;margin:0 auto;padding:32px 16px 64px;">
+
+<!-- Header -->
+<div style="display:flex;align-items:center;justify-content:space-between;padding:0 0 24px;margin-bottom:8px;">
+  <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+    <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,rgba(203,166,247,0.2),rgba(137,180,250,0.2));border:1.5px solid rgba(203,166,247,0.35);display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:14px;color:#cba6f7;">FF</div>
+    <span style="font-family:monospace;font-weight:600;font-size:15px;color:#cdd6f4;">Form and Field</span>
+  </a>
+  <a href="/" style="font-size:13px;color:#a6adc8;text-decoration:none;font-family:monospace;">← Home</a>
+</div>
+
+<!-- Gate (shown by default) -->
+<div id="gate" style="text-align:center;padding:80px 0;">
+  <div style="display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#a6e3a1;background:rgba(166,227,161,0.1);padding:4px 16px;border-radius:20px;margin-bottom:24px;font-weight:600;">Beta Program</div>
+  <h1 style="font-size:32px;font-weight:700;letter-spacing:-1px;margin:0 0 12px;color:#cdd6f4;">Welcome, tester.</h1>
+  <p style="font-size:15px;color:#a6adc8;max-width:420px;margin:0 auto 32px;">Enter the access code you received to view your beta dashboard.</p>
+  <div style="max-width:320px;margin:0 auto;">
+    <input id="passInput" type="password" placeholder="Access code" style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid #45475a;background:#313244;color:#cdd6f4;font-family:monospace;font-size:15px;outline:none;text-align:center;letter-spacing:2px;margin-bottom:12px;" />
+    <button onclick="tryUnlock()" style="width:100%;padding:12px 16px;border-radius:10px;background:#cba6f7;color:#11111b;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;font-weight:600;border:none;cursor:pointer;">Enter</button>
+    <p id="error" style="color:#f38ba8;font-size:13px;margin-top:12px;font-family:monospace;display:none;">Invalid code. Try again.</p>
+  </div>
+</div>
+
+<!-- Dashboard (hidden until correct password) -->
+<div id="dashboard" style="display:none;">
+
+  <div style="text-align:center;padding:40px 0 32px;border-bottom:2px solid #313244;margin-bottom:32px;">
+    <div style="display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#a6e3a1;background:rgba(166,227,161,0.1);padding:4px 16px;border-radius:20px;margin-bottom:14px;font-weight:600;">Beta Program</div>
+    <h1 style="font-size:28px;font-weight:700;letter-spacing:-0.5px;margin:0 0 8px;color:#cdd6f4;">Form and Field <span style="color:#a6e3a1;">Beta</span></h1>
+    <p style="font-size:14px;color:#a6adc8;">Thanks for testing. Your feedback shapes the product.</p>
+  </div>
+
+  <!-- Download -->
+  <div style="padding:24px;background:#181825;border:1px solid #313244;border-radius:14px;margin-bottom:16px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="width:44px;height:44px;border-radius:10px;background:rgba(166,227,161,0.12);color:#a6e3a1;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:15px;flex-shrink:0;">DL</div>
+      <div>
+        <div style="font-size:16px;font-weight:600;color:#cdd6f4;">Download FF.rbz</div>
+        <div style="font-size:12px;color:#7f849c;font-family:monospace;">v11 — March 2026</div>
+      </div>
+    </div>
+    <a href="https://form-field.com/wp-content/uploads/2026/03/FF.rbz" download style="display:block;text-align:center;padding:12px;border-radius:10px;background:rgba(166,227,161,0.12);color:#a6e3a1;font-weight:600;font-size:14px;text-decoration:none;border:1px solid rgba(166,227,161,0.2);">Download Extension (.rbz)</a>
+    <p style="font-size:12px;color:#7f849c;margin-top:10px;text-align:center;font-family:monospace;">Install: Extensions → Extension Manager → Install Extension</p>
+  </div>
+
+  <!-- License Key -->
+  <div style="padding:24px;background:#181825;border:1px solid #313244;border-radius:14px;margin-bottom:16px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="width:44px;height:44px;border-radius:10px;background:rgba(203,166,247,0.12);color:#cba6f7;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:15px;flex-shrink:0;">LK</div>
+      <div>
+        <div style="font-size:16px;font-weight:600;color:#cdd6f4;">Beta License Key</div>
+        <div style="font-size:12px;color:#7f849c;font-family:monospace;">Valid through beta period</div>
+      </div>
+    </div>
+    <div style="background:#313244;border-radius:8px;padding:14px 16px;font-family:monospace;font-size:14px;color:#f9e2af;text-align:center;letter-spacing:1px;word-break:break-all;" id="licenseKey">
+      FF-BETA-XXXX-XXXX-XXXX
+    </div>
+    <button onclick="copyKey()" id="copyBtn" style="display:block;width:100%;margin-top:10px;padding:8px;border-radius:8px;background:transparent;color:#7f849c;font-family:monospace;font-size:12px;border:1px solid #313244;cursor:pointer;">Copy to clipboard</button>
+  </div>
+
+  <!-- Quick Links -->
+  <div style="padding:24px;background:#181825;border:1px solid #313244;border-radius:14px;margin-bottom:16px;">
+    <div style="font-size:14px;font-weight:600;color:#cdd6f4;margin-bottom:14px;">Quick Links</div>
+    <a href="/quick-start-guide/" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #313244;text-decoration:none;">
+      <span style="font-size:14px;color:#a6adc8;">Quick Start Guide</span>
+      <span style="color:#7f849c;">→</span>
+    </a>
+    <a href="/colors-and-elevation-tags/" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #313244;text-decoration:none;">
+      <span style="font-size:14px;color:#a6adc8;">Colors &amp; Elevation Tags</span>
+      <span style="color:#7f849c;">→</span>
+    </a>
+    <a href="/documentation/" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;text-decoration:none;">
+      <span style="font-size:14px;color:#a6adc8;">All Documentation</span>
+      <span style="color:#7f849c;">→</span>
+    </a>
+  </div>
+
+  <!-- Bug Report -->
+  <div style="padding:24px;background:#181825;border:1px solid #313244;border-radius:14px;margin-bottom:16px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="width:44px;height:44px;border-radius:10px;background:rgba(243,139,168,0.12);color:#f38ba8;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:15px;flex-shrink:0;">BG</div>
+      <div>
+        <div style="font-size:16px;font-weight:600;color:#cdd6f4;">Report a Bug</div>
+        <div style="font-size:12px;color:#7f849c;font-family:monospace;">Or send feedback — all of it helps</div>
+      </div>
+    </div>
+    <input id="bugTitle" type="text" placeholder="What happened?" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid #45475a;background:#313244;color:#cdd6f4;font-size:14px;outline:none;margin-bottom:8px;box-sizing:border-box;" />
+    <textarea id="bugDesc" placeholder="Steps to reproduce, what you expected vs what happened..." rows="4" style="width:100%;padding:10px 14px;border-radius:8px;border:1px solid #45475a;background:#313244;color:#cdd6f4;font-size:13px;outline:none;resize:vertical;font-family:'Segoe UI',system-ui,sans-serif;margin-bottom:10px;box-sizing:border-box;"></textarea>
+    <button onclick="submitBug()" id="bugBtn" style="width:100%;padding:10px;border-radius:8px;background:rgba(243,139,168,0.12);color:#f38ba8;font-weight:600;font-size:13px;border:1px solid rgba(243,139,168,0.2);cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;">Submit Report</button>
+  </div>
+
+  <!-- Changelog -->
+  <div style="padding:24px;background:#181825;border:1px solid #313244;border-radius:14px;">
+    <div style="font-size:14px;font-weight:600;color:#cdd6f4;margin-bottom:14px;">Changelog</div>
+    <div style="padding:10px 0;border-bottom:1px solid #313244;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-family:monospace;font-size:13px;font-weight:600;color:#a6e3a1;">v11</span>
+        <span style="font-family:monospace;font-size:11px;color:#7f849c;">March 2026</span>
+      </div>
+      <p style="font-size:13px;color:#a6adc8;margin:6px 0 0;">Gridlines panel, CAD visibility independence, assembly beam inventory, Cadworks CSV import, smart diff, SF face edit persistence, base64 execute_script.</p>
+    </div>
+    <div style="padding:10px 0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-family:monospace;font-size:13px;font-weight:600;color:#89b4fa;">v10</span>
+        <span style="font-family:monospace;font-size:11px;color:#7f849c;">February 2026</span>
+      </div>
+      <p style="font-size:13px;color:#a6adc8;margin:6px 0 0;">Multiverse model comparison, cost code editor, category templates, Hyper Parse, measurements panel, assembly system.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="margin-top:40px;padding-top:20px;border-top:1px solid #313244;text-align:center;font-size:12px;color:#7f849c;">
+    <p style="margin:0;">Form and Field Beta — March 2026</p>
+    <p style="margin:4px 0 0;"><a href="mailto:support@form-field.com" style="color:#cba6f7;text-decoration:none;">support@form-field.com</a></p>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ═══ CHANGE THIS PASSWORD ═══
+var BETA_CODE = 'ff-beta-2026';
+// ═══════════════════════════
+
+// ═══ CHANGE THIS LICENSE KEY ═══
+var LICENSE_KEY = 'FF-BETA-XXXX-XXXX-XXXX';
+// ════════════════════════════════
+
+function tryUnlock() {
+  var input = document.getElementById('passInput').value.trim();
+  if (input === BETA_CODE) {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('licenseKey').textContent = LICENSE_KEY;
+    try { sessionStorage.setItem('ff-beta', '1'); } catch(e) {}
+  } else {
+    document.getElementById('error').style.display = 'block';
+    document.getElementById('passInput').style.borderColor = '#f38ba8';
+    setTimeout(function() {
+      document.getElementById('error').style.display = 'none';
+      document.getElementById('passInput').style.borderColor = '#45475a';
+    }, 2000);
+  }
+}
+
+// Auto-unlock if already entered this session
+try {
+  if (sessionStorage.getItem('ff-beta') === '1') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('licenseKey').textContent = LICENSE_KEY;
+  }
+} catch(e) {}
+
+// Enter key to submit
+document.getElementById('passInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') tryUnlock();
+});
+
+function copyKey() {
+  var key = document.getElementById('licenseKey').textContent;
+  navigator.clipboard.writeText(key).then(function() {
+    document.getElementById('copyBtn').textContent = 'Copied!';
+    setTimeout(function() {
+      document.getElementById('copyBtn').textContent = 'Copy to clipboard';
+    }, 1500);
+  });
+}
+
+function submitBug() {
+  var title = document.getElementById('bugTitle').value.trim();
+  var desc = document.getElementById('bugDesc').value.trim();
+  if (!title) return;
+  var body = 'Bug: ' + title + '\n\n' + desc + '\n\n---\nSent from FF Beta Portal';
+  window.location.href = 'mailto:support@form-field.com?subject=' + encodeURIComponent('[FF Beta Bug] ' + title) + '&body=' + encodeURIComponent(body);
+  document.getElementById('bugBtn').textContent = 'Opening email client...';
+  setTimeout(function() {
+    document.getElementById('bugBtn').textContent = 'Submit Report';
+    document.getElementById('bugTitle').value = '';
+    document.getElementById('bugDesc').value = '';
+  }, 2000);
+}
+</script>
+</body>
+</html>
