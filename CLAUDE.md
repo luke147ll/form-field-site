@@ -37,7 +37,7 @@ Static site for Form and Field, a SketchUp extension for construction takeoff in
 - **Callout boxes:** Left-colored border with tinted background (mauve for info, yellow for warnings, blue for tips)
 
 ## Key URLs
-- **LemonSqueezy checkout:** `https://formfield.lemonsqueezy.com/checkout/buy/ae8b9f68-e30c-4edf-b54e-f39a19a73af1`
+- **LemonSqueezy checkout:** `https://formfield.lemonsqueezy.com/checkout/buy/20bf4834-32d8-40d7-9546-13e3dd170b07`
 - **Support email:** `support@form-field.com`
 - **Product:** Form and Field v11, SketchUp 2026
 
