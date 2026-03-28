@@ -42,6 +42,11 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:'Segoe UI',system-ui,sans-seri
     <p style="font-size:14px;color:#a6adc8;">Thanks for testing. Your feedback shapes the product.</p>
   </div>
 
+  <!-- Big CTA button -->
+  <div id="discountCTA" style="text-align:center;margin-bottom:16px;">
+    <button onclick="scrollToTerms()" style="width:100%;padding:18px 24px;border-radius:14px;background:linear-gradient(135deg,rgba(203,166,247,0.15),rgba(166,227,161,0.15));border:1.5px solid rgba(166,227,161,0.3);color:#a6e3a1;font-family:'Segoe UI',system-ui,sans-serif;font-size:18px;font-weight:700;cursor:pointer;letter-spacing:0.5px;">Generate Beta Discount</button>
+  </div>
+
   <!-- Beta Discount (hidden until terms agreed) -->
   <div id="discountSection" style="display:none;padding:24px;background:#181825;border:1px solid rgba(166,227,161,0.3);border-radius:14px;margin-bottom:16px;">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
@@ -227,6 +232,7 @@ try {
     if (sessionStorage.getItem('ff-beta-agreed') === '1') {
       document.getElementById('agreeCheck').checked = true;
       document.getElementById('discountSection').style.display = 'block';
+      document.getElementById('discountCTA').style.display = 'none';
     }
   }
 } catch(e) {}
@@ -235,6 +241,20 @@ try {
 document.getElementById('passInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') tryUnlock();
 });
+
+function scrollToTerms() {
+  // Expand terms if collapsed
+  var body = document.getElementById('termsBody');
+  var chev = document.getElementById('termsChev');
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+    chev.style.transform = 'rotate(180deg)';
+  }
+  // Scroll to the checkbox
+  setTimeout(function() {
+    document.getElementById('agreeCheck').scrollIntoView({behavior:'smooth',block:'center'});
+  }, 100);
+}
 
 function toggleTerms() {
   var body = document.getElementById('termsBody');
@@ -252,6 +272,7 @@ function agreeToggle() {
   setTimeout(function() {
     var checked = document.getElementById('agreeCheck').checked;
     document.getElementById('discountSection').style.display = checked ? 'block' : 'none';
+    document.getElementById('discountCTA').style.display = checked ? 'none' : 'block';
     try {
       if (checked) { sessionStorage.setItem('ff-beta-agreed', '1'); }
       else { sessionStorage.removeItem('ff-beta-agreed'); }
