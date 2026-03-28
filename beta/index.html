@@ -83,6 +83,19 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:'Segoe UI',system-ui,sans-seri
     <span style="font-size:13px;color:#a6e3a1;font-family:monospace;font-weight:600;" id="testerLabel"></span>
   </div>
 
+  <!-- License Key -->
+  <div style="padding:24px;background:#181825;border:1px solid #313244;border-radius:14px;margin-bottom:16px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="width:44px;height:44px;border-radius:10px;background:rgba(203,166,247,0.12);color:#cba6f7;display:flex;align-items:center;justify-content:center;font-family:monospace;font-weight:700;font-size:15px;flex-shrink:0;">LK</div>
+      <div>
+        <div style="font-size:16px;font-weight:600;color:#cdd6f4;">Beta License Key</div>
+        <div style="font-size:12px;color:#7f849c;font-family:monospace;">Enter this in SketchUp when prompted</div>
+      </div>
+    </div>
+    <div style="background:#313244;border-radius:8px;padding:14px 16px;font-family:monospace;font-size:16px;color:#f9e2af;text-align:center;letter-spacing:1px;word-break:break-all;font-weight:700;" id="licenseKey"></div>
+    <button onclick="copyKey()" id="copyBtn" style="display:block;width:100%;margin-top:10px;padding:8px;border-radius:8px;background:transparent;color:#7f849c;font-family:monospace;font-size:12px;border:1px solid #313244;cursor:pointer;">Copy to clipboard</button>
+  </div>
+
   <!-- Quick Links -->
   <div style="padding:24px;background:#181825;border:1px solid #313244;border-radius:14px;margin-bottom:16px;">
     <div style="font-size:14px;font-weight:600;color:#cdd6f4;margin-bottom:14px;">Quick Links</div>
@@ -205,6 +218,19 @@ var BETA_CODES = {
   'ridge-india':     'Tester 9',
   'chord-juliet':    'Tester 10'
 };
+
+var BETA_KEYS = {
+  'timber-alpha':    'FF-BETA-TIMBER-ALPHA',
+  'rafter-bravo':    'FF-BETA-RAFTER-BRAVO',
+  'truss-charlie':   'FF-BETA-TRUSS-CHARLIE',
+  'joist-delta':     'FF-BETA-JOIST-DELTA',
+  'purlin-echo':     'FF-BETA-PURLIN-ECHO',
+  'beam-foxtrot':    'FF-BETA-BEAM-FOXTROT',
+  'stud-golf':       'FF-BETA-STUD-GOLF',
+  'slab-hotel':      'FF-BETA-SLAB-HOTEL',
+  'ridge-india':     'FF-BETA-RIDGE-INDIA',
+  'chord-juliet':    'FF-BETA-CHORD-JULIET'
+};
 // ════════════════════════════════════
 
 var activeTester = null;
@@ -229,6 +255,7 @@ function showDashboard(code) {
   document.getElementById('signup').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
   document.getElementById('testerLabel').textContent = activeTester + ' (' + code + ')';
+  document.getElementById('licenseKey').textContent = BETA_KEYS[code] || 'FF-BETA-' + code.toUpperCase().replace('-', '-');
   try {
     sessionStorage.setItem('ff-beta', '1');
     sessionStorage.setItem('ff-beta-code', code);
@@ -291,6 +318,16 @@ function agreeToggle() {
       else { sessionStorage.removeItem('ff-beta-agreed'); }
     } catch(e) {}
   }, 10);
+}
+
+function copyKey() {
+  var key = document.getElementById('licenseKey').textContent;
+  navigator.clipboard.writeText(key).then(function() {
+    document.getElementById('copyBtn').textContent = 'Copied!';
+    setTimeout(function() {
+      document.getElementById('copyBtn').textContent = 'Copy to clipboard';
+    }, 1500);
+  });
 }
 
 function copyDiscount() {
