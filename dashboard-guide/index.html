@@ -27,9 +27,11 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 .tip-bottom[data-tip]:hover::before{bottom:auto;top:calc(100% + 4px);border:6px solid transparent;border-bottom-color:#cba6f7}
 .tip-left[data-tip]:hover::after{left:auto;right:0;transform:none}
 .tip-left[data-tip]:hover::before{left:auto;right:12px;transform:none}
+.tip-right[data-tip]:hover::after{left:0;right:auto;transform:none}
+.tip-right[data-tip]:hover::before{left:12px;right:auto;transform:none}
 [data-tip]:hover{outline:1.5px solid rgba(203,166,247,0.5);outline-offset:2px;border-radius:4px}
 .sl{display:inline-block;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#cba6f7;font-weight:600;background:rgba(203,166,247,0.1);padding:3px 12px;border-radius:4px;margin:20px 0 10px;font-family:monospace}
-.db-section{margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:hidden;margin-bottom:4px}
+.db-section{margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:visible;margin-bottom:4px}
 .hb{padding:4px 10px;border-radius:6px;background:#313244;color:#cdd6f4;font-size:11px;font-family:monospace;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:4px}
 .hb-pri{background:#cba6f7;color:#11111b;font-weight:600}
 .hb-grn{background:#a6e3a1;color:#11111b;font-weight:600}
@@ -106,7 +108,7 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 <!-- ============================================================ -->
 <!-- DASHBOARD MOCK-UP -->
 <!-- ============================================================ -->
-<div style="border:1px solid #45475a;border-radius:12px;overflow:hidden;background:#1e1e2e;box-shadow:0 16px 60px rgba(0,0,0,0.4);">
+<div style="border:1px solid #45475a;border-radius:12px;overflow:visible;background:#1e1e2e;box-shadow:0 16px 60px rgba(0,0,0,0.4);">
 
 <!-- ==================== HEADER ==================== -->
 <div class="sl" style="margin:12px 12px 0">Header</div>
@@ -123,13 +125,12 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
   <span data-tip="CLEAR — Removes all colored highlight overlays from the model. Entities return to their normal material appearance." class="tip-bottom hb">Clear</span>
   <span data-tip="UNDO — Reverts the last category assignment, cost code change, or bulk edit action. Supports up to 50 undo steps. Keyboard shortcut: Ctrl+Z." class="tip-bottom hb" style="color:#7f849c;">Undo</span>
   <span data-tip="EXPORT — Opens an export menu with options for CSV (spreadsheet-ready data) and HTML Report (formatted, printable takeoff with quantities, cost codes, and category breakdowns)." class="tip-bottom hb" style="color:#a6e3a1;">Export</span>
-  <span data-tip="DEBUG — Toggles a hidden debug log panel at the bottom. Shows timestamped messages from the Ruby backend — useful for troubleshooting scan issues or reporting bugs to support." class="tip-bottom hb" style="font-size:9px;color:#a6e3a1;">dbg</span>
 </div>
 
 <!-- ==================== TAB BAR ==================== -->
 <div class="sl" style="margin:12px 12px 0">Tab Bar</div>
 <div style="display:flex;gap:0;background:#181825;border-bottom:1px solid #313244;">
-  <span data-tip="TAKEOFF — The main view. Shows all scanned entities organized by category/container with counts, measurements, cost codes, and visibility controls. This is where you do most of your work." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;font-weight:600;color:#cba6f7;border-bottom:2px solid #cba6f7;cursor:pointer;">Takeoff</span>
+  <span data-tip="TAKEOFF — The main view. Shows all scanned entities organized by category/container with counts, measurements, cost codes, and visibility controls. This is where you do most of your work." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;font-weight:600;color:#89b4fa;border-bottom:2px solid #89b4fa;cursor:pointer;">Takeoff</span>
   <span data-tip="MEASUREMENTS — Dedicated measurement manager. Filter by type (LF, SF, Elevation, Volume, Count, Wall), add manual measurements, review calculated values per category, and manage parts linked to measurements." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;color:#7f849c;cursor:pointer;">Measurements</span>
   <span data-tip="NOTES — Project notes system. Create RFIs, punch items, field notes, change orders, and safety notes. Pin notes to entities, assign urgency (Critical/High/Normal/Low), track status, and thread replies." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;color:#7f849c;cursor:pointer;">Notes</span>
   <span data-tip="ASSEMBLIES — Group related entities into assemblies with beam inventories and parts lists. Create from visible entities or selections, import from Cadworks CSV, switch between List and Card views." class="tip-bottom" style="padding:8px 16px;font-size:12px;font-family:monospace;color:#7f849c;cursor:pointer;">Assemblies</span>
@@ -306,7 +307,7 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 
 <!-- ==================== BULK EDIT BAR ==================== -->
 <div class="sl" style="margin:20px 12px 0">Bulk Edit Bar</div>
-<div style="margin:0 8px;border:2px solid #cba6f7;border-radius:8px;overflow:hidden;background:#181825;margin-bottom:4px;">
+<div style="margin:0 8px;border:2px solid #cba6f7;border-radius:8px;overflow:visible;background:#181825;margin-bottom:4px;">
   <div style="display:flex;align-items:center;gap:6px;padding:8px 12px;flex-wrap:wrap;font-family:monospace;font-size:11px;">
     <span data-tip="SELECTION COUNT — How many entities are selected across all groups." style="color:#cba6f7;font-weight:700;cursor:help;">3 sel</span>
     <span style="font-size:10px;color:#7f849c;">Cat:</span>
@@ -348,7 +349,7 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 
 <!-- ==================== MULTIVERSE TOGGLE BAR ==================== -->
 <div class="sl" style="margin:20px 12px 0">Multiverse Toggle Bar (when Model B is loaded)</div>
-<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:hidden;background:#181825;margin-bottom:4px;">
+<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:visible;background:#181825;margin-bottom:4px;">
   <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;flex-wrap:wrap;font-family:monospace;font-size:11px;">
     <div style="display:inline-flex;border-radius:6px;border:1px solid #45475a;overflow:hidden;">
       <span data-tip="VIEW A — Show only Model A entities (the original/current model). Green indicator." style="padding:4px 12px;background:rgba(166,227,161,0.15);color:#a6e3a1;font-weight:700;cursor:help;border-right:1px solid #45475a;">A</span>
@@ -363,7 +364,7 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 
 <!-- ==================== VISUAL CLASSIFIER ==================== -->
 <div class="sl" style="margin:20px 12px 0">Visual Classifier (Scanner Mode)</div>
-<div style="margin:0 8px;border:1px solid #45475a;border-radius:8px;overflow:hidden;background:#181825;margin-bottom:4px;">
+<div style="margin:0 8px;border:1px solid #45475a;border-radius:8px;overflow:visible;background:#181825;margin-bottom:4px;">
   <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:#262637;flex-wrap:wrap;">
     <span data-tip="VISUAL CLASSIFIER — A special sorting mode for unclassified entities. Groups them visually so you can quickly assign categories. Much faster than sorting one-by-one." style="font-size:12px;font-weight:600;color:#cdd6f4;cursor:help;">Visual Classifier</span>
     <span data-tip="GROUP BY NAME — Groups uncategorized entities by their SketchUp definition name. Best for well-named models where similar objects share naming conventions." style="padding:3px 8px;border-radius:4px;background:#cba6f7;color:#11111b;font-size:10px;font-weight:600;cursor:help;">Name</span>
@@ -377,7 +378,7 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 
 <!-- ==================== MEASUREMENTS TAB ==================== -->
 <div class="sl" style="margin:20px 12px 0">Measurements Tab</div>
-<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:hidden;background:#181825;margin-bottom:4px;">
+<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:visible;background:#181825;margin-bottom:4px;">
   <div style="display:flex;align-items:center;gap:4px;padding:8px 12px;flex-wrap:wrap;">
     <span data-tip="LF CHIP — Toggle Linear Feet measurements on/off. Green when active. Count badge shows how many LF measurements exist." style="padding:3px 8px;border-radius:4px;background:rgba(166,227,161,0.15);color:#a6e3a1;font-size:10px;font-weight:600;cursor:help;display:inline-flex;align-items:center;gap:4px;border:1px solid rgba(166,227,161,0.3);">&#10236; LF <span style="background:rgba(166,227,161,0.2);padding:0 4px;border-radius:3px;font-size:9px;">24</span></span>
     <span data-tip="SF CHIP — Toggle Square Feet measurements. Blue when active." style="padding:3px 8px;border-radius:4px;background:rgba(137,180,250,0.15);color:#89b4fa;font-size:10px;font-weight:600;cursor:help;display:inline-flex;align-items:center;gap:4px;border:1px solid rgba(137,180,250,0.3);">&#11026; SF <span style="background:rgba(137,180,250,0.2);padding:0 4px;border-radius:3px;font-size:9px;">18</span></span>
@@ -394,7 +395,7 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 
 <!-- ==================== NOTES TAB ==================== -->
 <div class="sl" style="margin:20px 12px 0">Notes Tab</div>
-<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:hidden;background:#181825;margin-bottom:4px;">
+<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:visible;background:#181825;margin-bottom:4px;">
   <!-- Stats strip -->
   <div style="display:flex;gap:12px;padding:8px 12px;font-family:monospace;font-size:11px;border-bottom:1px solid #313244;">
     <span data-tip="OPEN — Notes that haven't been started yet." style="cursor:help"><strong style="color:#a6e3a1">5</strong> <span style="color:#a6adc8">Open</span></span>
@@ -422,7 +423,7 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 
 <!-- ==================== ASSEMBLIES TAB ==================== -->
 <div class="sl" style="margin:20px 12px 0">Assemblies Tab</div>
-<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:hidden;background:#181825;margin-bottom:4px;">
+<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:visible;background:#181825;margin-bottom:4px;">
   <div style="display:flex;align-items:center;gap:6px;padding:8px 12px;flex-wrap:wrap;">
     <span data-tip="FROM VISIBLE — Creates a new assembly from all currently visible entities in the model. Useful after isolating a specific area or trade." class="hb" style="color:#cba6f7;border:1px solid rgba(203,166,247,0.3);cursor:help;">From Visible</span>
     <span data-tip="FROM SELECTION — Creates an assembly from the currently selected entities in the Takeoff dashboard (checked rows)." class="hb" style="color:#a6e3a1;border:1px solid rgba(166,227,161,0.3);cursor:help;">From Selection</span>
@@ -437,7 +438,7 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 
 <!-- ==================== MULTIVERSE TAB ==================== -->
 <div class="sl" style="margin:20px 12px 0">Multiverse Tab</div>
-<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:hidden;background:#181825;margin-bottom:4px;padding:12px;">
+<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:visible;background:#181825;margin-bottom:4px;padding:12px;">
   <div data-tip="IMPORT BUTTON — Import a second .skp, .ifc, or Revit file as Model B for comparison. The model is loaded into SketchUp alongside Model A." style="text-align:center;padding:16px;cursor:help;">
     <div style="font-size:28px;margin-bottom:8px;">&#127756;</div>
     <div style="font-size:14px;font-weight:600;color:#cdd6f4;margin-bottom:4px;">Model Comparison</div>
@@ -458,7 +459,7 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 
 <!-- ==================== CAD TAB ==================== -->
 <div class="sl" style="margin:20px 12px 0">CAD Tab</div>
-<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:hidden;background:#181825;margin-bottom:4px;">
+<div style="margin:0 8px;border:1px solid #313244;border-radius:8px;overflow:visible;background:#181825;margin-bottom:4px;">
   <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #313244;">
     <span data-tip="GRIDLINES SECTION — Manage construction gridlines overlaid on your model. Create numeric (1,2,3...) or alphabetic (A,B,C...) grid systems by clicking points in the model." style="font-size:11px;font-weight:600;color:#89b4fa;cursor:help;">&#9783; Gridlines</span>
     <span data-tip="PLACE GRIDLINES — Opens the gridline creator. Choose numeric or alphabetic mode, then click two points to set width, then click to place each gridline." class="hb" style="color:#89b4fa;border:1px solid rgba(137,180,250,0.3);font-size:10px;padding:2px 6px;cursor:help;">Place Gridlines</span>
@@ -482,7 +483,7 @@ body{background:#1e1e2e;color:#cdd6f4;font-family:"Segoe UI",system-ui,sans-seri
 
 <!-- ==================== SCAN DIALOG ==================== -->
 <div class="sl" style="margin:20px 12px 0">Scan Dialog</div>
-<div style="margin:0 8px;border:1px solid #45475a;border-radius:12px;overflow:hidden;background:#181825;padding:20px;text-align:center;margin-bottom:4px;">
+<div style="margin:0 8px;border:1px solid #45475a;border-radius:12px;overflow:visible;background:#181825;padding:20px;text-align:center;margin-bottom:4px;">
   <div style="font-size:14px;font-weight:600;color:#cdd6f4;margin-bottom:12px;">Scan Model</div>
   <div data-tip="TEMPLATE SELECTOR — Choose a category template before scanning. Templates define which naming patterns map to which categories. 'No Template' scans without pre-classification. Other options match your saved templates (IFC Steel, Revit Arch, etc)." style="text-align:left;margin-bottom:16px;cursor:help;">
     <div style="font-size:11px;color:#a6adc8;margin-bottom:6px;">Template</div>
